@@ -1,4 +1,4 @@
-name: Build APK
+name: Build Android Artifacts
 
 on:
   workflow_dispatch:
@@ -35,15 +35,25 @@ jobs:
         with:
           gradle-version: '8.9'
 
-      - name: Build debug APK
-        run: gradle --no-daemon assembleDebug
+      - name: Build debug APK and AAB
+        run: gradle --no-daemon assembleDebug bundleDebug
 
       - name: Verify APK
         run: test -f app/build/outputs/apk/debug/app-debug.apk
 
+      - name: Verify AAB
+        run: test -f app/build/outputs/bundle/debug/app-debug.aab
+
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: PrivateExpenseTracker-debug
+          name: PrivateExpenseTracker-debug-apk
           path: app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+
+      - name: Upload AAB for Google Play Internal App Sharing
+        uses: actions/upload-artifact@v4
+        with:
+          name: PrivateExpenseTracker-debug-aab
+          path: app/build/outputs/bundle/debug/app-debug.aab
           if-no-files-found: error
