@@ -17,3 +17,5 @@ Financial data is intended to remain on-device. No financial-data API or cloud d
 ## Build
 
 GitHub Actions builds a debug APK automatically on pushes to `main` and via manual workflow dispatch.
+
+Build output: `PrivateExpenseTracker-debug/app-debug.apk`.
