@@ -1,0 +1,3 @@
+<resources>
+    <style name="Theme.PrivateExpenseTracker" parent="android:style/Theme.Material.Light.NoActionBar" />
+</resources>
